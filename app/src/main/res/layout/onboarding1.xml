@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="환영합니다!\n\n번번이 습관 형성에 실패 하시나요?\n\n다양한 카테고리를 통해\n만들고 싶은 습관을\n실천할 수 있도록 도와 드립니다." />
+
+
+</LinearLayout>

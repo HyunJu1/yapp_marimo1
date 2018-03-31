@@ -11,14 +11,24 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".Onboarding" />
+        <activity
+            android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MarimoEnroll"></activity>
+        <activity
+            android:name=".UserEnroll"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".Onboarding3Activity" />
+        <activity
+            android:name=".HabitEnroll"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".HistoryListActivity"></activity>
     </application>
 
 </manifest>

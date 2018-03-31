@@ -24,7 +24,7 @@ public class MarimoDBHelper extends SQLiteOpenHelper {
                 ");");
 
         // sample data
-        db.execSQL("insert into marimo values (null, 'babyMarimo', '1', '1');");
+//        db.execSQL("insert into marimo values (null, 'babyMarimo', '1', '1');");
 
     }
 

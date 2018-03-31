@@ -28,7 +28,7 @@ public class DataManager {
     }
 
     // get marimo's name
-    public String getMarimoNo() {
+    public String getMarimoName() {
         SQLiteDatabase marimoDB = marimoDBHelper.getReadableDatabase();
         String selectQuery = "SELECT * FROM marimo";
         Cursor cursor = marimoDB.rawQuery(selectQuery, null);
