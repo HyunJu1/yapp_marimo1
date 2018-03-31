@@ -21,6 +21,7 @@ public class HabitDBHelper extends SQLiteOpenHelper {
                 "  start_date TEXT not null," +
                 "  end_date TEXT not null," +
                 "  push TEXT," +
+                "  category TEXT,"+
                 "  constraint fk_habit foreign key (habit_no) references all_habit(all_no)" +
                 " );");
 

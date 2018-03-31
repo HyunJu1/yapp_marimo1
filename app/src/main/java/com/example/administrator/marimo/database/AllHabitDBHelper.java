@@ -19,11 +19,17 @@ public class AllHabitDBHelper extends SQLiteOpenHelper {
         db.execSQL("create table all_habit(" +
                 "  all_no Integer primary key," +
                 "  title TEXT not null," +
-                "  content TEXT not null" +
+                "  content TEXT not null," +
+                "  category TEXT not null"+
                 ");");
 
         // sample data
-//        db.execSQL("insert into all_habit values ();");
+        db.execSQL("insert into all_habit values (null, '거북목','11111','생활습관');");
+        db.execSQL("insert into all_habit values (null, '거북목2','1222','운동');");
+        db.execSQL("insert into all_habit values (null, '거북목3','1133','건강');");
+        db.execSQL("insert into all_habit values (null, '거북목4','14441','습관1');");
+        db.execSQL("insert into all_habit values (null, '거북목5','11551','습관2');");
+        db.execSQL("insert into all_habit values (null, '거북목6','11661','습관3');");
 
     }
 
