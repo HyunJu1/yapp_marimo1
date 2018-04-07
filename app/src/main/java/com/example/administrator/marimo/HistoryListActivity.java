@@ -8,6 +8,7 @@ import android.graphics.Shader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.administrator.marimo.database.AllHabitDBHelper;
@@ -35,6 +36,9 @@ public class HistoryListActivity extends AppCompatActivity {
     TextView habit1;
     TextView habit2;
     TextView habit3;
+    TextView tv_percent1;
+    TextView tv_percent2;
+    TextView tv_percent3;
 
 
     @Override
@@ -67,6 +71,10 @@ public class HistoryListActivity extends AppCompatActivity {
         habit2 = (TextView)findViewById(R.id.habit2);
         habit3 = (TextView)findViewById(R.id.habit3);
 
+        tv_percent1 = (TextView)findViewById(R.id.percent1);
+        tv_percent2 = (TextView)findViewById(R.id.percent2);
+        tv_percent3 = (TextView)findViewById(R.id.percent3);
+
         Shader shader = new LinearGradient(0, 0, 0, h_per1.getTextSize(),
                 Color.parseColor("#82307f"), Color.parseColor("#f8584c"),
                 Shader.TileMode.CLAMP);
@@ -74,19 +82,13 @@ public class HistoryListActivity extends AppCompatActivity {
         h_per2.getPaint().setShader(shader);
         h_per3.getPaint().setShader(shader);
 
-        Shader shader2 = new LinearGradient(0, 0, 0, h_msg1.getTextSize(),
-                Color.parseColor("#82307f"), Color.parseColor("#f8584c"),
-                Shader.TileMode.CLAMP);
         h_msg1.getPaint().setShader(shader);
         h_msg2.getPaint().setShader(shader);
         h_msg3.getPaint().setShader(shader);
 
-        Shader shader3 = new LinearGradient(0, 0, 0, habit1.getTextSize(),
-                Color.parseColor("#f8584c"), Color.parseColor("#82307f"),
-                Shader.TileMode.CLAMP);
-        habit1.getPaint().setShader(shader);
-        habit2.getPaint().setShader(shader);
-        habit3.getPaint().setShader(shader);
+        tv_percent1.getPaint().setShader(shader);
+        tv_percent2.getPaint().setShader(shader);
+        tv_percent3.getPaint().setShader(shader);
     }
 
     public void doing(){
@@ -140,11 +142,27 @@ public class HistoryListActivity extends AppCompatActivity {
         switch (cnt){
             case 1:
                 h_per1.setText(String.valueOf(percent));
+                h_msg2.setVisibility(View.GONE);
+                h_msg3.setVisibility(View.GONE);
+                habit2.setVisibility(View.GONE);
+                habit3.setVisibility(View.GONE);
+                tv_percent2.setVisibility(View.GONE);
+                tv_percent3.setVisibility(View.GONE);
+                h_per2.setVisibility(View.GONE);
+                h_per3.setVisibility(View.GONE);
                 break;
             case 2:
+                h_per2.setVisibility(View.VISIBLE);
+                h_msg2.setVisibility(View.VISIBLE);
+                tv_percent2.setVisibility(View.VISIBLE);
+                habit2.setVisibility(View.VISIBLE);
                 h_per2.setText(String.valueOf(percent));
                 break;
             case 3:
+                h_per3.setVisibility(View.VISIBLE);
+                h_msg3.setVisibility(View.VISIBLE);
+                tv_percent3.setVisibility(View.VISIBLE);
+                habit3.setVisibility(View.VISIBLE);
                 h_per3.setText(String.valueOf(percent));
                 break;
         }
