@@ -1,19 +1,25 @@
 package com.example.administrator.marimo;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.app.AppCompatActivity;
@@ -31,7 +37,30 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.os.Bundle;
+import android.view.View;
+
 public class MainActivity extends AppCompatActivity {
+   //마리모 움직이기 ***********
+//    BallView ballView;
+
+    private SensorManager mSensorMgr;
+    private Sensor accelerometer;
+    private Sensor magnetometer;
+
+//********************************
+
+
     DataManager dbmamager;
     AllHabitDBHelper allhelper;
     HabitDBHelper helper;
@@ -53,9 +82,53 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//마리모 움직이기 ***********
+//        ballView = new BallView(this);
+        Window win = getWindow();
+
+        win.setContentView(R.layout.activity_main);
+
+
+        mSensorMgr = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
+        accelerometer = mSensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        magnetometer = mSensorMgr.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+ //****************************
+
+
+//        LayoutInflater inflater=getLayoutInflater();
+//        View layout=(View) inflater.inflate(R.layout.activity_main,null);
+//        addContentView(layout, new LinearLayout.LayoutParams(320,480));
+
+//        LayoutInflater inflater = (LayoutInflater)getSystemService(
+//
+//                Context.LAYOUT_INFLATER_SERVICE);
+//
+//        RelativeLayout linear = (RelativeLayout)inflater.inflate(ballView);
+//
+
+
+        //파라미터를 세팅해줌
+//
+//        LinearLayout.LayoutParams paramlinear = new LinearLayout.LayoutParams(
+//
+//                LinearLayout.LayoutParams.MATCH_PARENT,
+//
+//                LinearLayout.LayoutParams.MATCH_PARENT
+//
+//        );
+//
+//
+//
+//        //윈도우에 추가시킴
+//
+//        win.addContentView(linear, paramlinear);
+
+
+
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
         str_date = df.format(new Date());
-        setContentView(R.layout.activity_main);
+
+
         text=(TextView)findViewById(R.id.textView4);
         text1=(TextView)findViewById(R.id.textView5);
         to_history =(ImageButton)findViewById(R.id.image_button);
@@ -120,8 +193,8 @@ public class MainActivity extends AppCompatActivity {
                 String end_date = c.getString(c.getColumnIndex("end_date"));
                 String push = c.getString(c.getColumnIndex("push"));
 
-                String category = c.getString(c.getColumnIndex("category"));
-                Log.i("dbdb", "id:" + _id + " start_date : " + start_date + " end_date: " + end_date+" category: "+category);
+               String category = c.getString(c.getColumnIndex("category"));
+                Log.i("dbdb", "id:" + _id + " start_date : " + start_date + " end_date: " + end_date+" category: ");
                 dataObjects.add(_id);
                 habit_startDate.add(start_date);
                 doing_date=doDiffOfDate(habit_startDate.get(0),str_date);
@@ -142,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
                 String name = c2.getString(c2.getColumnIndex("title"));
                 String name2 = c2.getString(c2.getColumnIndex("content"));
                 String category =c2.getString(c2.getColumnIndex("category"));
-                Log.i("dbdb", " name : " + name + " name2: " + name2+"category:"+category);
+                Log.i("dbdb", " name : " + name + " name2: " + name2+"category:");
 
                 habit_no.add(no);
                 habit_title.add(name);
@@ -255,7 +328,7 @@ public class MainActivity extends AppCompatActivity {
                     int a = habit_no.get(position);
                     Log.i("c", String.valueOf(a));
 
-                    Toast.makeText(getApplicationContext(),"날짜차이:"+doing_date, Toast.LENGTH_SHORT).show();
+                //    Toast.makeText(getApplicationContext(),"날짜차이:"+doing_date, Toast.LENGTH_SHORT).show();
 
                     finding(a, doing_date);
 
@@ -267,7 +340,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     int a = habit_no.get(position);
                     // doing_date=doDiffOfDate(habit_startDate.get(position),str_date);
-                    Toast.makeText(getApplicationContext(),"날짜차이:"+doing_date, Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(getApplicationContext(),"날짜차이:"+doing_date, Toast.LENGTH_SHORT).show();
 
                     finding2(a, doing_date);
                 }
@@ -297,4 +370,122 @@ public class MainActivity extends AppCompatActivity {
         }
         return diffDays;
     }
+
+
+//
+//
+//
+////마리모 움직이기*******************
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        mSensorMgr.unregisterListener(ballView);
+//    }
+//
+//
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//
+//        mSensorMgr.registerListener(ballView, accelerometer, SensorManager.SENSOR_DELAY_FASTEST);
+//        mSensorMgr.registerListener(ballView, magnetometer, SensorManager.SENSOR_DELAY_FASTEST);
+//    }
+//
+//
+//    class BallView extends View implements SensorEventListener {
+//
+//        float[] mGravity = null;
+//        float[] mGeomagnetic= null;
+//
+//        float pitch;
+//        float roll;
+//
+//        Paint paint;
+//
+//        int width;
+//        int height;
+//
+//        int x;
+//        int y;
+//        int r;
+//
+//        boolean isStart;
+//
+//        public BallView(Context context) {
+//            super(context);
+//            paint = new Paint();
+//            paint.setColor(Color.RED);
+//            paint.setAntiAlias(true);
+//            isStart = true;
+//            r = 100;
+//        }
+//
+//        public void onDraw(Canvas canvas) {
+//            if(isStart) {
+//                width = canvas.getWidth();
+//                height = canvas.getHeight();
+//                x =  width / 2;
+//                y =  height / 2;
+//                isStart = false;
+//            }
+//
+//            canvas.drawCircle(x, y, r, paint);
+//        }
+//
+//
+//        @Override
+//        public void onAccuracyChanged(Sensor arg0, int arg1) {
+//
+//        }
+//
+//        @Override
+//        public void onSensorChanged(SensorEvent event) {
+////			중력과 자기장 값 획득, 각각 획득되므로 모두 수집할 때까지 멤버변수에 저장
+//            if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+//                mGravity = event.values.clone();
+//            }
+//            if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD)
+//                mGeomagnetic = event.values.clone();
+//
+////		    두 센서 값이 모두 수집되었을 경우
+//            if (mGravity != null && mGeomagnetic != null) {
+//                float rotationMatrix[] = new float[9];
+////		    	기기 측정 중력 및 자기장 값을 토대로 회전 정보 획득, rotationMatrix에 해당 값 저장
+//                boolean success = SensorManager.getRotationMatrix(rotationMatrix, null, mGravity, mGeomagnetic);
+//
+//                if (success) {
+//                    float values[] = new float[3];
+////		    		회전 정보 매트릭스를 통해 기기의 orientation 획득, values 에 저장
+//                    SensorManager.getOrientation(rotationMatrix, values);
+//
+////		    		from rad. to degree
+//                    for (int i=0; i < values.length; i++) {
+//                        Double degrees = Math.toDegrees(values[i]);
+//                        values[i] = degrees.floatValue();
+//                    }
+//
+//                    float pitch = values[1];
+//                    float roll = values[2];
+//
+//                    if (pitch > 0) {
+//                        if (y > r) y -= 1;
+//                    } else if (pitch < 0) {
+//                        if (y < (height - r)) y += 1;
+//                    }
+//
+//                    if (roll > 0) {
+//                        if (x <
+//                                (width - r)) x += 1;
+//                    } else if (roll < 0) {
+//                        if (x > r) x -= 1;
+//                    }
+//
+//                    invalidate();
+//                }
+//            }
+//        }
+//
+//    }
+
+//*****************************************
 }

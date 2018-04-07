@@ -33,16 +33,16 @@
             android:layout_alignParentStart="true"
             app:srcCompat="@mipmap/rock" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/imageView2"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_toLeftOf="@+id/imageView4"
-            android:layout_toStartOf="@+id/imageView4"
-            app:srcCompat="@mipmap/marimo" />
+        <!--<ImageView-->
+            <!--android:id="@+id/imageView"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_above="@+id/imageView2"-->
+            <!--android:layout_marginEnd="20dp"-->
+            <!--android:layout_marginRight="20dp"-->
+            <!--android:layout_toLeftOf="@+id/imageView4"-->
+            <!--android:layout_toStartOf="@+id/imageView4"-->
+            <!--app:srcCompat="@mipmap/marimo" />-->
 
         <ImageView
             android:id="@+id/imageView4"
@@ -53,7 +53,10 @@
             android:layout_alignRight="@+id/imageView2"
             android:layout_marginBottom="65dp"
             app:srcCompat="@mipmap/pull_2" />
-
+        <com.example.administrator.marimo.AnimatedView
+            android:id="@+id/anim_view"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"/>
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"

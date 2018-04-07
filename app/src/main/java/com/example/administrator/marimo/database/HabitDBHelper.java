@@ -39,6 +39,7 @@ public class HabitDBHelper extends SQLiteOpenHelper {
         db.execSQL("insert into habit values (32, '2018-03-31', '2018-06-04', '운동하셨나요?', '건강', 0);");
 
 
+
     }
 
     @Override
